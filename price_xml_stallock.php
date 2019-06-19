@@ -274,3 +274,182 @@ foreach($data as $key => $value ){
     //if ($i > 2){break;}
     //if( $ob["ID"] == ){break;}
 }
+
+
+/*Новая версия через функцию*/
+
+<?include($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");?>
+
+<?
+CModule::IncludeModule('iblock');
+$dataFileName = $_SERVER["DOCUMENT_ROOT"] . "/1c/data_stallock.txt";
+$data = explode ("\n\r", file_get_contents($dataFileName));
+
+$counter = 0;
+foreach($data as $key => $value ){
+    $t = trim($value);
+
+    if($t != ""){
+        $aaa = explode(">\t<", substr($t, 1, -1));
+    }
+
+    //strtr($aaa[9], " ", "");
+    $aaa[4] = preg_replace("/\s/u","",$aaa[4]); //euro
+    $aaa[5] = preg_replace("/\s/u","",$aaa[5]); //euro
+    $aaa[6] = preg_replace("/\s/u","",$aaa[6]); //euro
+    $aaa[7] = preg_replace("/\s/u","",$aaa[7]); //euro
+    $aaa[8] = preg_replace("/\s/u","",$aaa[8]); //rub
+    $aaa[9] = preg_replace("/\s/u","",$aaa[9]); //rub
+    $aaa[10] = preg_replace("/\s/u","",$aaa[10]); //rub
+    $aaa[11] = preg_replace("/\s/u","",$aaa[11]); //rub
+
+    /*
+    echo "<pre>";
+    print_r($aaa);
+    echo "<pre>";
+    */
+
+    $IBLOCK_ID = 14;
+    $ELEMENT_ID = 0;
+
+    $PROPERTY_VALUES = array(
+        "NAME_IN_1C" => $aaa[1],
+        "VENDOR_IN_1C" => $aaa[2],
+        "ARTIKUL_IN_1C" => $aaa[3],
+    );
+
+    $arFilter = array(
+        "IBLOCK_ID" => $IBLOCK_ID,
+        "XML_ID" => $aaa[0],
+    );
+    $arSelect = Array("ID", "NAME");
+    $res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
+    if($ob = $res->Fetch()){
+        echo "ELEMENT_ID = " . $ob["ID"];
+        $ELEMENT_ID = $ob["ID"];
+    }
+    if ($ELEMENT_ID != 0) {
+        CIBlockElement::SetPropertyValuesEx($ELEMENT_ID, $IBLOCK_ID, $PROPERTY_VALUES);
+        $counter++;
+    }
+
+    // добавление коэффициента единицы измерения товара
+    $result = \Bitrix\Catalog\MeasureRatioTable::add(array(
+        'PRODUCT_ID' => $ob["ID"],
+        'RATIO' => "" //коэффициент_единицы_измерения
+    ) );
+    // добавление цены
+    if(!empty($aaa[4])){
+        //БАЗОВАЯ ЦЕНА
+        setPrice($ob["ID"],1 , $aaa[4], "EUR");
+
+        /*$priceId = CPrice::SetBasePrice(
+            $ob["ID"],
+            $aaa[4],
+            "EUR"
+        );*/
+        /*$priceId = CPrice::Add(array(
+            'PRODUCT_ID' => $ob["ID"],
+            'CATALOG_GROUP_ID' => , //ID_типа_цены,
+            'PRICE' => $aaa[4], // str_replace(" ","",$aaa[4]),
+            'CURRENCY' => "EUR"
+        ));*/
+        //МЕЛКИЙ ОПТ
+        setPrice($ob["ID"],3 , $aaa[5], "EUR");
+        /* $priceId = CPrice::Add(array(
+             'PRODUCT_ID' => $ob["ID"],
+             'CATALOG_GROUP_ID' => 3, //ID_типа_цены,
+             'PRICE' => $aaa[5], // str_replace(" ","",$aaa[5]),
+             'CURRENCY' => "EUR"
+         ));*/
+        //ОПТ
+        setPrice($ob["ID"],2 , $aaa[6], "EUR");
+        /*$priceId = CPrice::Add(array(
+            'PRODUCT_ID' => $ob["ID"],
+            'CATALOG_GROUP_ID' => 2, //ID_типа_цены,
+            'PRICE' => $aaa[6], // str_replace(" ","",$aaa[6]),
+            'CURRENCY' => "EUR"
+        ));*/
+        //КРУПНЫЙ ОПТ
+        setPrice($ob["ID"],4 , $aaa[7], "EUR");
+        /*$priceId = CPrice::Add(array(
+            'PRODUCT_ID' => $ob["ID"],
+            'CATALOG_GROUP_ID' => 4, //ID_типа_цены,
+            'PRICE' => $aaa[7], //str_replace(" ","",$aaa[7]),
+            'CURRENCY' => "EUR"
+        ));*/
+    }
+    else {
+        //БАЗОВАЯ ЦЕНА
+        setPrice($ob["ID"],1 , $aaa[8], "RUB");
+        /*$priceId = CPrice::SetBasePrice(
+            $ob["ID"],
+            $aaa[8],
+            "RUB"
+        );*/
+        /*$priceId = CPrice::Add(array(
+            'PRODUCT_ID' => $ob["ID"],
+            'CATALOG_GROUP_ID' => , //ID_типа_цены,
+            'PRICE' => $aaa[8], // str_replace(" ","",$aaa[8]),
+            'CURRENCY' => "RUB"
+        ));*/
+        //МЕЛКИЙ ОПТ
+        setPrice($ob["ID"],3 , $aaa[9], "RUB");
+        /*$priceId = CPrice::Add(array(
+            'PRODUCT_ID' => $ob["ID"],
+            'CATALOG_GROUP_ID' => 3, //ID_типа_цены,
+            'PRICE' => $aaa[9], // str_replace(" ","",$aaa[9]),
+            'CURRENCY' => "RUB"
+        ));*/
+        //ОПТ
+        setPrice($ob["ID"],2 , $aaa[10], "RUB");
+        /*$priceId = CPrice::Add(array(
+            'PRODUCT_ID' => $ob["ID"],
+            'CATALOG_GROUP_ID' => 2, //ID_типа_цены,
+            'PRICE' => $aaa[10],
+            'CURRENCY' => "RUB"
+        ));*/
+        //КРУПНЫЙ ОПТ
+        setPrice($ob["ID"],4 , $aaa[11], "RUB");
+        /* $priceId = CPrice::Add(array(
+             'PRODUCT_ID' => $ob["ID"],
+             'CATALOG_GROUP_ID' => 4, //ID_типа_цены,
+             'PRICE' => $aaa[11], //str_replace(" ","",$aaa[11]),
+             'CURRENCY' => "RUB"
+         ));*/
+    }
+
+    //if ($i > 2){break;}
+    //if( $ob["ID"] == 422){break;}
+}
+
+echo 'Изменено ' . $counter . 'элементов';
+
+function setPrice($id, $priceType, $priceVal, $currency){
+    $PRODUCT_ID = $id;
+    $PRICE_TYPE_ID = $priceType;
+
+    $arFields = Array(
+        "PRODUCT_ID" => $PRODUCT_ID,
+        "CATALOG_GROUP_ID" => $PRICE_TYPE_ID,
+        "PRICE" => $priceVal,
+        "CURRENCY" => $currency
+    );
+
+    $res = CPrice::GetList(
+        array(),
+        array(
+            "PRODUCT_ID" => $PRODUCT_ID,
+            "CATALOG_GROUP_ID" => $PRICE_TYPE_ID
+        )
+    );
+
+    if ($arr = $res->Fetch())
+    {
+        CPrice::Update($arr["ID"], $arFields);
+    }
+    else
+    {
+        CPrice::Add($arFields);
+    }
+}
