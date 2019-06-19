@@ -1,0 +1,169 @@
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetTitle("Title");
+?>
+
+<?
+$arFilter = array("IBLOCK_ID" => 7, );
+$arSelect = array("ID", "DETAIL_PICTURE");
+$res = CIBlockElement::GetList(Array(), $arFilter, false, false, $arSelect);
+while($ar_fields = $res->GetNext())
+{
+    $arElements[$ar_fields["ID"]] = $ar_fields;
+    //$ar_fields["DETAIL_PICTURE_SRC"] = CFile::GetPath($ar_fields["DETAIL_PICTURE"]);
+}
+
+/*echo "<pre>";
+print_r($arElements);
+echo "</pre>";*/
+
+
+$arBrightColor = array();
+$count = 0;
+foreach ($arElements as $id => $detal) {
+    $count++;
+    if($count == 10)die();
+    $img = $_SERVER["DOCUMENT_ROOT"] . CFile::GetPath($detal["DETAIL_PICTURE"]);
+//$img = 'test1_y.jpg';
+
+// Файл для определения основного цвета
+//$im=ImageCreateFromJPEG('test1_y.jpg');
+    $im = ImageCreateFromJPEG($img);
+
+    $total_R = 0;
+    $total_G = 0;
+    $total_B = 0;
+
+// Размеры изображения
+    $width = ImageSX($im);
+    $height = ImageSY($im);
+
+// Подсчитать суммарные значения по RGB
+    for ($x = 0; $x < $width; $x++) {
+        for ($y = 0; $y < $height; $y++) {
+            $rgb = ImageColorAt($im, $x, $y);
+            $total_R += ($rgb >> 16) & 0xFF;
+            $total_G += ($rgb >> 8) & 0xFF;
+            $total_B += $rgb & 0xFF;
+        }
+    }
+
+// Прибраться за собой
+    ImageDestroy($im);
+
+// Определение значений RGB основного цвета
+    $avg_R = round($total_R / $width / $height);
+    $avg_G = round($total_G / $width / $height);
+    $avg_B = round($total_B / $width / $height);
+
+// Перевести RGB в HSV
+    $R = ($avg_R / 255);
+    $G = ($avg_G / 255);
+    $B = ($avg_B / 255);
+
+    $maxRGB = max(array($R, $G, $B));
+    $minRGB = min(array($R, $G, $B));
+    $delta = $maxRGB - $minRGB;
+
+// Цветовой тон
+    if ($delta != 0) {
+        if ($maxRGB == $R) {
+            $h = (($G - $B) / $delta);
+        } elseif ($maxRGB == $G) {
+            $h = 2 + ($B - $R) / $delta;
+        } elseif ($maxRGB == $B) {
+            $h = 4 + ($R - $G) / $delta;
+        }
+        $hue = round($h * 60);
+        if ($hue < 0) {
+            $hue += 360;
+        }
+    } else {
+        $hue = 0;
+    }
+
+// Насыщенность
+    if ($maxRGB != 0) {
+        $saturation = round($delta / $maxRGB * 100);
+    } else {
+        $saturation = 0;
+    }
+
+// Яркость
+    $value = round($maxRGB * 100);
+
+// Яркость меньше 30%
+    if ($value < 30) {
+        // Черный
+        $color = '000000';
+    } // Яркость больше 85% и насыщенность меньше 15%
+    elseif ($value > 85 && $saturation < 15) {
+        // Белый
+        $color = 'FFFFFF';
+    } // Насыщенность меньше 25%
+    elseif ($saturation < 25) {
+        // Серый
+        $color = '909090';
+    }
+// Определить цвет по цветовому тону
+    /*
+    else {
+        // Красный
+        if ($hue>320 || $hue<=40) {
+            $color='#FF0000';
+        }
+        // Розовый
+        elseif ($hue>260 && $hue<=320) {
+            $color='#FF00FF';
+        }
+        // Синий
+        elseif ($hue>190 && $hue<=260) {
+            $color='#0000FF';
+        }
+        // Голубой
+        elseif ($hue>175 && $hue<=190) {
+            $color='#00FFFF';
+        }
+        // Зеленый
+        elseif ($hue>70 && $hue<=175) {
+            $color='#00FF00';
+        }
+        // Желтый
+        else {
+            $color='#FFFF00';
+        }
+    */
+    else {
+        // Красный
+        if ($hue > 310 || $hue <= 15) {
+            $color = 'FF0000';
+        } // Оранжевый
+        elseif ($hue > 15 && $hue <= 40) {
+            $color = 'FFA500';
+        } // Желтый
+        elseif ($hue > 40 && $hue <= 70) {
+            $color = 'FFD600';
+        } // Зеленый
+        elseif ($hue > 70 && $hue <= 160) {
+            $color = '6DC065';
+        } // Голубой
+        elseif ($hue > 160 && $hue <= 200) {
+            $color = '68CDFF';
+        } // Синий
+        elseif ($hue > 200 && $hue <= 260) {
+            $color = '2A4FD7';
+        } // Фиолетовый
+        elseif ($hue > 260 && $hue <= 310) {
+            $color = 'A51BAE';
+        }
+    }
+    $arBrightColor[$id] = $color;
+}
+
+echo "<pre>";
+print_r($arBrightColor);
+echo "</pre>";
+//echo "<div>На картинке преобладает этот цвет $color <span style='background-color: $color;padding-right: 42px;'>&nbsp;</span><br><img style='width: 450px;' src='$img'></div>";
+?>
+
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
