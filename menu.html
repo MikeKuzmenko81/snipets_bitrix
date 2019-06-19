@@ -1,0 +1,651 @@
+<style>
+    /* menu */
+    .submenu-title {
+        font-weight: 600;
+        font-size: 14px !important;
+        letter-spacing: 1px;
+        line-height: 22px;
+        position: relative;
+        margin: 0 0 5px;
+        padding: 4px 0;
+    }
+    .menu-img img{
+        max-width: 20px;
+    }
+    .allmenu{
+        border-bottom: 1px solid #eee;
+        background-color: #EF244D;
+        margin-bottom: 15px;
+    }
+    #all-menu{
+        position: absolute;
+        top: 48px;
+        z-index: 9;
+        border: 1px solid #eee;
+        border-radius: 0 0 3px 3px;
+        left: 15px;
+        right: 15px;
+        background-color: #fff;
+    }
+    #all-menu .navbar-collapse{
+        padding: 0
+    }
+    @media(min-width: 768px){
+        .index-head #all-menu{
+            display: block !important;
+        }
+        .static-menu li a {
+            color: #fff;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Roboto-Medium';
+            transition: all 0.3s ease-in-out;
+        }
+        .static-menu li a:hover {
+            color: #ddd;
+        }
+        .static-menu li {
+            padding-top: 14px;
+            margin:0 15px;
+        }
+    }
+    @media (min-width: 768px) {
+        #menu .dropdown:hover .dropdown-menu{
+            display: block;
+        }
+        #menu .dropdown:hover .dropdown-menu{
+            display: block;
+            padding: 12px 0;
+            visibility: visible;
+            opacity: 1;
+            filter: alpha(opacity=100);
+            border-radius: 0;
+        }
+        #menu .dropdown-menu{
+            background: #FFF;
+            visibility: hidden;
+            display: block;
+            opacity: 0;
+            filter: alpha(opacity=0);
+            -webkit-transition: all 0.35s ease-out 0s;
+            -o-transition: all 0.35s ease-out 0s;
+            transition: all 0.35s ease-out 0s;
+            left: 100%;
+            margin: 0 2px !important;
+            border: none;
+        }
+        #menu .nav > li > a::before{
+            background-color: transparent;
+            content: "";
+            height: 3px;
+            left: 0;
+            margin: 0 auto;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            transition: all 0.4s ease-out 0s;
+            width: 3px;
+        }
+        #menu .dropdown-inner a {
+            min-width: 210px;
+            padding: 3px 9px;
+        }
+        #menu .dropdown-menu{
+            padding: 12px 0;
+            top: 0;
+        }
+        .enangle {
+            float: right;
+            transition: all 0.3s ease 0s;
+            margin-top: 2px;
+        }
+        #menu li a:hover .enangle{
+            transform: rotate(-90deg);
+        }
+
+    }
+    #wr-menu button{
+        background: #D50A33;
+        border-color: transparent;
+        color: #fff;
+        font-size: 14px;
+        font-family: 'Roboto-Medium';
+        padding: 12px 15px;
+        border-radius: 3px 3px 0 0;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .cate{
+        margin:0 10px;
+    }
+    .menu-img,.menu-img {
+        margin-right: 12px;
+    }
+    .navbar{
+        margin-bottom: 0;
+    }
+    .owl-wrapper-outer {
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+    }
+    .view_more.my-menu {
+        color: #222222;
+        cursor: pointer;
+        padding: 15px 0px;
+        font-size: 14px;
+        background-color: transparent;
+        border-top: 1px solid #f1f1f1;
+        padding: 11px 20px;
+    }
+</style>
+<div class="allmenu">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-4">
+                <div class="hidden-xs">
+                    <div id="wr-menu">
+                        <button class="btn-block text-left" type="button" data-target="#all-menu" data-toggle="collapse">
+                            <i class="fa fa-bars"></i>
+                            <span class="cate">All Categories</span>
+                        </button>
+                    </div>
+                    <div id="all-menu" class="collapse">
+                        <nav id="menu" class="navbar">
+                            <div class="navbar-header">
+                                <span id="category" class="visible-xs">All Categories</span>
+                                <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                                    <i class="fa fa-bars"></i>
+                                </button>
+                            </div>
+                            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                                <ul class="nav">
+                                    <li class="moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=59">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/duckling.png" alt="beauty">
+                                            </div>
+                                            beauty
+                                        </a>
+                                    </li>
+                                    <li class="moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=69">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/bear.png" alt="beuty &amp; Spa">
+                                            </div>
+                                            beuty &amp; Spa
+                                        </a>
+                                    </li>
+                                    <li class="moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=60">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/toy.png" alt="shoes">
+                                            </div>
+                                            shoes
+                                        </a>
+                                    </li>
+                                    <li class="moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=68">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/train.png" alt="Smart Phone">
+                                            </div>
+                                            Smart Phone
+                                        </a>
+                                    </li>
+                                    <li class="moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=70">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-02.png" alt="Smart Phone">
+                                            </div>
+                                            Smart Phone
+                                        </a>
+                                    </li>
+                                    <li class="dropdown moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=20" class="dropdown-toggle header-menu" data-toggle="">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-04.png" alt="Desktops">
+                                            </div>
+                                            Desktops
+                                            <i class="fa fa-angle-down pull-right enangle"></i>
+                                        </a>
+                                        <div class="dropdown-menu" style="margin-left: -170px;">
+                                            <div class="dropdown-inner">
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu">
+                                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=20_26" class="submenu-title"> PC (0) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=26_61"> beuty &amp; Spa (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=26_63"> Smart Phone (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=26_62"> Smart watch (0) </a> </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu">
+                                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=20_27" class="submenu-title"> Mac (1) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_66"> Decor (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_67"> Decor (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_64"> Printers (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_65"> Trackballs (0) </a> </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown moremenu"><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=18" class="dropdown-toggle header-menu" data-toggle=""><div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-05.png" alt="Laptops ">
+                                            </div>Laptops <i class="fa fa-angle-down pull-right enangle"></i></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-inner">               <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=18_46" class="submenu-title"> Macs (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=18_45" class="submenu-title"> Windows (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                        </div></li>
+                                    <li class="dropdown moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25" class="dropdown-toggle header-menu" data-toggle=""><div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-06.png" alt="Components">
+                                            </div>Components<i class="fa fa-angle-down pull-right enangle"></i>
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-inner">
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu">
+                                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_29" class="submenu-title"> Mice and Trackballs (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu">
+                                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_28" class="submenu-title"> Monitors (3) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li>
+                                                                <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=28_35"> test 1 (0) </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=28_36"> test 2 (0) </a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu">
+                                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_30" class="submenu-title"> Printers (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu">
+                                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_31" class="submenu-title"> Scanners (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu">
+                                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_32" class="submenu-title"> Web Cameras (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="moremenu">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=57">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-01.png" alt="Tablets">
+                                            </div>
+                                            Tablets
+                                        </a>
+                                    <li class="view_more my-menu">
+                                        <i class="fa fa-plus thumb_img"></i>
+                                        <a class="dropdown-toggle">More Categories</a>
+                                    </li>
+                                    </li>
+                                    <li class="moremenu wr_hide_menu" style="display: none;">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=17">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/duckling.png" alt="Software">
+                                            </div>
+                                            Software
+                                        </a>
+                                    </li>
+                                    <li class="moremenu wr_hide_menu" style="display: none;">
+                                        <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=24">
+                                            <div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-04.png" alt="Phones">
+                                            </div>
+                                            Phones
+                                        </a>
+                                    </li>
+                                    <li class="moremenu wr_hide_menu" style="display: none;"><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=33"><div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-02.png" alt="Cameras">
+                                            </div>Cameras</a></li>
+                                    <li class="dropdown moremenu wr_hide_menu" style="display: none;"><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34" class="dropdown-toggle header-menu" data-toggle=""><div class="menu-img pull-left">
+                                                <img src="http://templateinspire.com/opencart/toys/image/catalog/menu-icon/t-06.png" alt="MP3 Players">
+                                            </div>MP3 Players<i class="fa fa-angle-down pull-right enangle"></i></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-inner">               <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_43" class="submenu-title"> test 11 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_44" class="submenu-title"> test 12 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_47" class="submenu-title"> test 15 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_48" class="submenu-title"> test 16 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_49" class="submenu-title"> test 17 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_50" class="submenu-title"> test 18 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_51" class="submenu-title"> test 19 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_52" class="submenu-title"> test 20 (0) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=52_58"> test 25 (0) </a> </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_53" class="submenu-title"> test 21 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_54" class="submenu-title"> test 22 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_55" class="submenu-title"> test 23 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_56" class="submenu-title"> test 24 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_38" class="submenu-title"> test 4 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_37" class="submenu-title"> test 5 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_39" class="submenu-title"> test 6 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_40" class="submenu-title"> test 7 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_41" class="submenu-title"> test 8 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_42" class="submenu-title"> test 9 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+
+                </div>
+
+                <div class="hidden-sm hidden-md hidden-lg">
+                    <nav id="menu" class="navbar">
+
+                        <div class="navbar-header"><!-- <span id="category" class="visible-xs">All Categories</span> -->
+                            <button type="button" class="btn btn-navbar" onclick="openNav()" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+                        </div>
+
+                        <div id="mySidenav" class="sidenav">
+                            <div class="close-nav">
+                                <span class="categories">Category</span>
+                                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="fa fa-close"></i></a>
+                            </div>
+                            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                                <ul class="nav navbar-nav">
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=59">beauty</a></li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=69">beuty &amp; Spa</a></li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=60">shoes</a></li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=68">Smart Phone</a></li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=70">Smart Phone</a></li>
+                                    <li class="dropdown"><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=20" class="dropdown-toggle header-menu" data-toggle="">Desktops<i class="fa fa-angle-down pull-right"></i></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-inner">               <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=20_26" class="submenu-title"> PC (0) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=26_61"> beuty &amp; Spa (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=26_63"> Smart Phone (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=26_62"> Smart watch (0) </a> </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=20_27" class="submenu-title"> Mac (1) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_66"> Decor (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_67"> Decor (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_64"> Printers (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=27_65"> Trackballs (0) </a> </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                            <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=20" class="see-all">Show All Desktops</a> </div>
+                                    </li>
+                                    <li class="dropdown"><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=18" class="dropdown-toggle header-menu" data-toggle="">Laptops <i class="fa fa-angle-down pull-right"></i></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-inner">               <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=18_46" class="submenu-title"> Macs (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=18_45" class="submenu-title"> Windows (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                            <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=18" class="see-all">Show All Laptops </a> </div>
+                                    </li>
+                                    <li class="dropdown"><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25" class="dropdown-toggle header-menu" data-toggle="">Components<i class="fa fa-angle-down pull-right"></i></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-inner">               <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_29" class="submenu-title"> Mice and Trackballs (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_28" class="submenu-title"> Monitors (3) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=28_35"> test 1 (0) </a> </li>
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=28_36"> test 2 (0) </a> </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_30" class="submenu-title"> Printers (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_31" class="submenu-title"> Scanners (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25_32" class="submenu-title"> Web Cameras (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                            <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=25" class="see-all">Show All Components</a> </div>
+                                    </li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=57">Tablets</a></li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=17">Software</a></li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=24">Phones</a></li>
+                                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=33">Cameras</a></li>
+                                    <li class="dropdown"><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34" class="dropdown-toggle header-menu" data-toggle="">MP3 Players<i class="fa fa-angle-down pull-right"></i></a>
+                                        <div class="dropdown-menu">
+                                            <div class="dropdown-inner">               <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_43" class="submenu-title"> test 11 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_44" class="submenu-title"> test 12 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_47" class="submenu-title"> test 15 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_48" class="submenu-title"> test 16 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_49" class="submenu-title"> test 17 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_50" class="submenu-title"> test 18 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_51" class="submenu-title"> test 19 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_52" class="submenu-title"> test 20 (0) </a>
+                                                        <ul class="list-unstyled grand-child">
+                                                            <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=52_58"> test 25 (0) </a> </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_53" class="submenu-title"> test 21 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_54" class="submenu-title"> test 22 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_55" class="submenu-title"> test 23 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_56" class="submenu-title"> test 24 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_38" class="submenu-title"> test 4 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_37" class="submenu-title"> test 5 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_39" class="submenu-title"> test 6 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                                <ul class="list-unstyled">
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_40" class="submenu-title"> test 7 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_41" class="submenu-title"> test 8 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                    <!--3rd level-->
+                                                    <li class="dropdown-submenu"> <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34_42" class="submenu-title"> test 9 (0) </a>
+                                                    </li>
+                                                    <!--3rd level over-->
+                                                </ul>
+                                            </div>
+                                            <a href="http://templateinspire.com/opencart/toys/index.php?route=product/category&amp;path=34" class="see-all">Show All MP3 Players</a> </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+                </div>
+
+
+                <script type="text/javascript">
+                    function headermenu() {
+                        if (jQuery(window).width() < 768)
+                        {
+                            jQuery('ul.nav li.dropdown a.header-menu').attr("data-toggle","dropdown");
+                        }
+                        else
+                        {
+                            jQuery('ul.nav li.dropdown a.header-menu').attr("data-toggle","");
+                        }
+                    }
+                    $(document).ready(function(){headermenu();});
+                    jQuery(window).resize(function() {headermenu();});
+                    jQuery(window).scroll(function() {headermenu();});
+                </script>
+            </div>
+            <div class="col-md-9 col-sm-8">
+                <ul class="list-inline static-menu hidden-xs">
+                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=common/home">Home</a></li>
+                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/special">Specials</a></li>
+                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=information/contact">Contact Us</a></li>
+                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=information/sitemap">Site Map</a></li>
+                    <li><a href="http://templateinspire.com/opencart/toys/index.php?route=product/manufacturer">Brand</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
