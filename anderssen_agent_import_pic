@@ -1,0 +1,84 @@
+<?
+require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+$APPLICATION->SetTitle("Title");
+?>
+<?
+CModule::IncludeModule('iblock');
+$counter = 0;
+$arFilter = Array("IBLOCK_ID"=>3, "PROPERTY_COORD_MAP"=>false, "PROPERTY_NOTAUTO"=>false);
+  $rsElements = CIBlockElement::GetList(array("ID"=>"DESC"), $arFilter, false, false, Array("ID", "IBLOCK_ID", "NAME", "PROPERTY_COORD_MAP"));
+            while($arElement = $rsElements->getNext())
+            {
+
+/*echo "<pre>";
+print_r($arElement);
+echo "</pre>";*/
+$counter++;
+
+if($counter>100) die("stop");
+$params = array(
+    'geocode' => $arElement["NAME"], // адрес
+    'format'  => 'json',                          // формат ответа
+    'results' => 1,                               // количество выводимых результатов
+    'key'     => '...',                           // ваш api key
+);
+$response = json_decode(file_get_contents('http://geocode-maps.yandex.ru/1.x/?' . http_build_query($params, '', '&')));
+ 
+if ($response->response->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found > 0)
+{
+    $coord =  $response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+
+
+$arr = explode(" ", $coord);
+$coord = $arr[1].",".$arr[0];
+echo  $coord;
+echo "  Обновим - ".$arElement["ID"]." ".$arElement["IBLOCK_ID"]." ".$coord." COORD_MAP <b>co = ".$arElement["PROPERTY_COORD_MAP_VALUE"]."</b><br>";
+
+ CIBlockElement::SetPropertyValues($arElement["ID"], $arElement["IBLOCK_ID"],  $coord, "COORD_MAP");
+unset($coord);
+
+}
+else
+{
+    
+CIBlockElement::SetPropertyValues($arElement["ID"], $arElement["IBLOCK_ID"],  "1", "NOTAUTO");
+
+
+echo 'Ничего не найдено';
+}
+
+
+
+	echo " ".$arElement["NAME"]." ".$arElement["PROPERTY_COORD_MAP_VALUE"]."<br>";
+            }
+
+
+
+
+
+
+
+
+
+$params = array(
+    'geocode' => 'Москва, ул. Льва Толстого, 16', // адрес
+    'format'  => 'json',                          // формат ответа
+    'results' => 1,                               // количество выводимых результатов
+    'key'     => '...',                           // ваш api key
+);
+$response = json_decode(file_get_contents('http://geocode-maps.yandex.ru/1.x/?' . http_build_query($params, '', '&')));
+ 
+if ($response->response->GeoObjectCollection->metaDataProperty->GeocoderResponseMetaData->found > 0)
+{
+    echo $response->response->GeoObjectCollection->featureMember[0]->GeoObject->Point->pos;
+}
+else
+{
+    echo 'Ничего не найдено';
+}
+
+
+
+?>
+
+<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
