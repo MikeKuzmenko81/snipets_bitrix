@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name='yandex-verification' content='4e5571e5e674555c' />
+	<title>Создание и изменение товара через Битрикс API</title>
+	<meta name="keywords" content="банк, вклады, кредиты, ипотека" />
+	<meta name="description" content="Работа с товарами через API это то с чем постоянно приходится сталкиваться всем разработчикам Битрикс. По большому счету тема в интернете освещена вполне подробно, но как-то раздроблено. Чтобы понять процесс работы с товарами полностью неопытным битрикс программистам нужно собирать информацию по крохам. Поэтому была написана эта статья, включающая все стадии создания и изменения товаров через Битрикс API." />
+	<link rel="shortcut icon" type="image/x-icon" href="/bitrix/templates/b_iplogic_template/favicon.ico" />
+
+    <!-- css -->
+    <link href="/bitrix/templates/b_iplogic_template/assets/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+	<link href="/bitrix/css/main/bootstrap.min.css?1519285165121326" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/css/main/font-awesome.min.css?151928516523748" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/cache/css/s1/b_iplogic_template/page_0a39db33505c885280cddceea764c108/page_0a39db33505c885280cddceea764c108_v1.css?15670620814326" type="text/css"  rel="stylesheet" />
+<link href="/bitrix/cache/css/s1/b_iplogic_template/template_ccce563e7100f90049103321456edab4/template_ccce563e7100f90049103321456edab4_v1.css?156706186911765" type="text/css"  data-template-style="true" rel="stylesheet" />
+    <link href="/bitrix/templates/b_iplogic_template/assets/prism/prism.css" rel="stylesheet" type="text/css"/>
+    
+		
+    <!--[if lt IE 9]>
+    <script>
+    document.createElement('header');
+    document.createElement('nav');
+    document.createElement('section');
+    document.createElement('article');
+    document.createElement('aside');
+    document.createElement('footer');
+    document.createElement('figure');
+    document.createElement('hgroup');
+    document.createElement('menu');
+    </script>
+    <![endif]-->
+
+</head>
+<body>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter38263200 = new Ya.Metrika({
+                    id:38263200,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/38263200" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<div id="panel"></div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6" style="padding-top:25px;">
+			<a href="/"><img alt="Мастерская iPloGic" src="/bitrix/templates/b_iplogic_template/images/sec-logo.png" alt="iplogic"></a>
+		</div>
+		<div id="header_right" class="col-sm-6">
+			+7 (926) 961-66-26<br>
+						<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#call-back" style="outline: none;border: none;"><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;Просьба перезвонить</button>
+			<button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#feed-back" style="outline: none;border: none;"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Напишите нам</button>
+		</div>
+	</div>
+</div>
+<div id="masthead">
+	<div class="container">
+		<div id="header-menu">
+
+<ul id="top-menu" class="menu-h">
+<li class="tmcolor2"><a href="/company/">Компания</a></li><li class="tmcolor1"><a href="/services/">Услуги</a></li><li class="tmcolor3"><a href="/works/">Работы</a></li><li class="selected tmcolor4"><a href="/baza-znaniy/">База знаний</a></li></ul>
+		</div>
+		<div id="mob-search"></div>
+		<div id="mob-menu"></div>
+	</div>
+</div>
+<div id="mobile-menu">
+
+<ul id="top-menu-mob" class="menu-v">
+<li class=""><a href="/services/">
+Услуги</a></li>
+<li class=""><a href="/services/sites/">
+∴ Создание сайтов</a></li>
+<li class=""><a href="/services/web-programming/">
+∴ Web-программирование</a></li>
+<li class=""><a href="/services/support/">
+∴ Поддержка</a></li>
+<li class=""><a href="/services/promotion/">
+∴ Продвижение</a></li>
+<li class=""><a href="/company/">
+О компании</a></li>
+<li class=""><a href="/company/contacts/">
+∴ Контакты</a></li>
+<li class=""><a href="/company/news/">
+∴ Новости</a></li>
+<li class=""><a href="/works/">
+Работы</a></li>
+<li class="selected "><a href="/baza-znaniy/">
+База знаний</a></li>
+</ul>
+</div>
+<div id="mobile-search">
+			
+<form action="/search/index.php">
+   <div class="input-group input-group-lg">
+      <input type="text" class="form-control" name="q">
+      <span class="input-group-btn">
+        <button class="btn btn-default-lg" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
+    </div>
+</form></div><div class="container">
+	<div class="row">
+		<div class="col-md-9" style="margin-top:20px;">
+			<b class="r0 top"></b><p><a href="/" title="На главную страницу"><img src="/bitrix/templates/b_iplogic_template/images/home.gif" width="9" height="8" alt="" /></a>&nbsp;&mdash;&nbsp;<a href="/baza-znaniy/" title="База знаний">База знаний</a>&nbsp;&mdash;&nbsp;<span>Создание и изменение товара через Битрикс API</span></p><b class="r0 bottom"></b>			<h1>Создание и изменение товара через Битрикс API</h1>
+		</div>
+		<div id="header_right" class="col-md-3 visible-md visible-lg" style="margin-top:30px;">
+			
+<form action="/search/index.php">
+   <div class="input-group input-group-sm">
+      <input type="text" class="form-control" name="q">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
+    </div>
+</form>		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div id="content" class="col-sm-12 col-md-9">
+		<!--CONTENT-->
+
+<p>
+				
+	
+	<div>
+			Работа с товарами через API это то с чем постоянно приходится сталкиваться всем разработчикам Битрикс. По большому счету тема в интернете освещена вполне подробно, но как-то раздроблено. Чтобы понять процесс работы с товарами полностью неопытным битрикс программистам нужно собирать информацию по крохам. Поэтому была написана эта статья, включающая все стадии создания и изменения товаров через Битрикс API.<br>
+ <br>
+ Для начала нужно разобраться что представляет собой товар в концепции Битрикса. <br>
+ <br>
+ В основе любого товара или предложения лежит, как и требует того концепция Битрикса, инфоблок. Создавая его не забудьте поставить галочку "Является торговым каталогом", а также "Инфоблок имеет торговые предложения" если это предполагается. Создание инфоблока через API здесь мы рассматривать не будем, это отдельная тема. Для товарных предложений создается свой инфоблок. То есть создание товара начинается с создания элемента инфоблока. Но товара у нас еще нет.<br>
+ <br>
+ Далее к элементам инфоблока&nbsp;добавляется уже собственно экземпляр товара, который имеет характерные именно для товара свойства.<br>
+ <br>
+ И уже к товару добавляются цены, скидки остатки по складам и т.д.<br>
+ <br>
+ Теперь к практике.<br>
+ <br>
+ При работе с товаром мы постоянно будем составлять массивы полей объектов. Их полное описание можно найти 
+<!--noindex--><a rel="nofollow" href="https://dev.1c-bitrix.ru/api_help/iblock/fields.php">здесь</a><!--/noindex-->&nbsp;для инфоблоков и <a href="https://dev.1c-bitrix.ru/api_help/catalog/fields.php">здесь</a> для товаров.&nbsp;<u><b>Настоятельно рекомендуем</b></u>&nbsp;ознакомиться с ними, так как это даст более полное понимание процесса. Так же мы не будем описывать получение переменных, подставляемых в код. Это уже зависит от вашего кода. Для примера опишем добавление цен и остатков по складам. Принцип работы с другими связанными параметрами товаров (например, скидками) такой же, а методы можно найти в документации. Также будем считать, что инфоблоки, цены, склады уже созданы.<br>
+ <br>
+<h2>Создание товара через API Битрикса</h2>
+ Сначала подключаем нужные нам модули<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">&lt;?
+use Bitrix\Main\Loader;
+
+Loader::includeModule("iblock");
+Loader::includeModule("catalog");
+</code></pre> &nbsp; <br>
+ Как писалось выше, первым делом создаем элемент инфоблока.<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">// все переменные для массива определяются как строки и числа
+// отдельно стоит описать добавлкение изображений
+// детальная картинка (картинка анонса устанавливается так же)
+$detailPicture = CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/img/det_pict.jpg");
+// дополнительные картинки
+// для их добавления инфоблок должен иметь свойство с кодом "MORE_PHOTO" типа "файл"
+$photos = Array(
+	"n0" = Array("VALUE" =&gt; CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/img/pict_1.jpg")),
+	"n1" = Array("VALUE" =&gt; CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/img/pict_2.jpg")),
+	"n2" = Array("VALUE" =&gt; CFile::MakeFileArray($_SERVER["DOCUMENT_ROOT"]."/img/pict_3.jpg")),
+);
+
+//собираем массив полей
+$arFields = Array(
+	"IBLOCK_ID"          =&gt; $IBlock_ID,
+	"IBLOCK_SECTION_ID"  =&gt; $section,
+	"NAME"               =&gt; $name,
+	"CODE"               =&gt; $code,
+	"ACTIVE"             =&gt; "Y",
+	"DETAIL_TEXT_TYPE"   =&gt; "html",
+	"DETAIL_TEXT"        =&gt; $text,
+	"DETAIL_PICTURE"]    =&gt; $detailPicture;
+	"PROPERTY_VALUES"    =&gt; Array(            // массив со свойствами инфоблока
+		"ARTNUMBER"  =&gt; $artnumber,
+		"MORE_PHOTO" =&gt; $photos,
+	),
+);
+
+// создаем объект класса для работы
+$obElement = new CIBlockElement();
+
+// добавляем элемент, а ели не получается, то выводим ошибку
+$ID = $obElement-&gt;Add($arFields);
+if( $ID &lt; 1 ) { echo $obElement-&gt;LAST_ERROR; }
+</code></pre><br>
+ Важный момент. Для торговых предложений инфоблок должен иметь свойство&nbsp;<b>CML2_LINK</b> (название может быть другим) типа "<b>Привязка к товарам (SKU)</b>" в который обязательно заносится ID товара, которому принадлежит предложение.<br>
+ <br>
+ Элемент инфоблока создан. Теперь превращаем его в товар. Для примера зададим товару общее количество и вес.<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">$productID = CCatalogProduct::add(array("ID" =&gt; $ID, "QUANTITY" =&gt; $total, "WEIGHT" =&gt;$weight));
+</code></pre><br>
+ Тем самым мы не просто добавили значения свойств, а создали запись в таблице товаров.<br>
+ <br>
+ Даже без цены мы уже получили товар в понимании Битрикса. Просто он "бесценный" и его нельзя продать. Но мы же понимаем, что каждый товар должен иметь свою цену, а возможно и не одну. Потому добавляем их. предположим, что у нас есть базовая цена с ID 1. Для других типов цен порядок такой же.<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">// добавляем цены нашему товару
+// собираем массив
+$arFields = Array(
+	"CURRENCY"         =&gt; "RUB",       // валюта
+	"PRICE"            =&gt; $price,      // значение цены
+	"CATALOG_GROUP_ID" =&gt; 1,           // ID типа цены
+	"PRODUCT_ID"       =&gt; $ID,  // ID товара (элемента инфоблока)
+);
+// добавляем
+CPrice::Add( $arFields );
+</code></pre><br>
+ Теперь добавим количество по складам. Пример для склада с ID 1:<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">$arFields = Array(
+	"PRODUCT_ID" =&gt; $ID,
+	"STORE_ID"   =&gt; $storeID,
+	"AMOUNT"     =&gt; $rest,
+);
+CCatalogStoreProduct::Add($arFields);
+</code></pre><br>
+ Теперь мы получили товар, имеющий все нежные необходимые характеристики.<br>
+ <br>
+<h2>Изменение свойств товаров через API Битрикса</h2>
+ При изменении свойств товаров в Битриксе нужно четко понимать какую именно его составляюoe. нужно изменить (элемент инфоблока, продукт, цену и т.д.). В зависимости от этого необходимо использовать Те или иные методы Битрикса.<br>
+ <br>
+ Рекомендуем при работе с существующими товарами использовать только методы update, а не add даже если это разрешено документацией. Конечно это не касается случаев когда добавляется новый склад или цена.<br>
+ <br>
+ Не забываем подключать модули (см. выше).&nbsp;<br>
+ <br>
+ Работа с элементом инфоблока. К примеру изменим описание для анонса.<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">// создаем объект класса для работы
+$obElement = new CIBlockElement();
+// обновляем элемент
+$obElement-&gt;Update($ID, Array("PREVIEW_TEXT"=&gt;$text));
+</code></pre><br>
+ Работа с продуктом. Изменим значение зарезервированного количества товаров.<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">CCatalogProduct::Update($ID, array('QUANTITY</code>_RESERVED' =&gt; $reserv));</pre><br>
+ Изменение цены. Тут нужно отметить, что при работе с ценами и другими подобными параметрами товаров мы работаем не с товаром, а , в данном случае, с ценовым предложением, которое связано с товаром, но является совершенно отдельной сущностью. Обновим цену с ID 1.<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">// получаем ID ценового предложения
+$ppID = false;
+$res = CPrice::GetList( array(), array( "PRODUCT_ID" =&gt; $productID, "CATALOG_GROUP_ID" =&gt; 1 ) );
+if ($arr = $res-&gt;Fetch()) {
+	$ppID = $arr["ID"];
+}
+// собираем массив
+$arFields = Array(
+	"CURRENCY"         =&gt; "RUB",       // валюта
+	"PRICE"            =&gt; $price,      // значение цены
+);
+if ( $ppID ) {
+	// обновляем
+	CPrice::Update( $ppID, $arFields );
+}
+else {
+	// добавляем
+	CPrice::Add( $arFields );
+}
+</code></pre><br>
+ Проделаем то же самое для склада с ID 2. При этом все пояснения по ценовому предложению актуальны и здесь.<br>
+ <br>
+ <pre class="line-numbers"><code class="language-php">// получаем ID остатка товара на складе
+$sID = false;
+$res = CCatalogStoreProduct::GetList( array(), array( "PRODUCT_ID" =&gt; $productID, "STORE_ID" =&gt; 2 ) );
+if ($arr = $res-&gt;Fetch()) {
+	$sID = $arr["ID"];
+}
+// собираем массив
+$arFields = Array(
+	"AMOUNT"     =&gt; $rest,
+);
+if ( $sID ) {
+	// обновляем
+	CCatalogStoreProduct::Update($sID,$arFields);
+}
+else {
+	// добавляем
+	CCatalogStoreProduct::Add($arFields);
+}
+</code></pre><br>
+ <br>
+ Конечно, о работе с товарами можно рассказывать долго, но для знакомства и начала понимания принципов&nbsp;управления товарами через Битрикс API этого, надеюсь, достаточно.<br>
+ <br>
+ <br>		</div>
+
+		
+			<div class="bx-newsdetail-date"><i class="fa fa-calendar-o"></i> 27.07.2017</div>
+		
+</p>
+		</div>
+		<div class="col-sm-3 visible-md visible-lg">
+					<!--RIGHT MENU-->
+					
+
+
+
+<noindex>
+	<div class="search-tags-cloud"  style='width:100%;'><a href="/search/index.php?tags=API" style="font-size: 10px; color: #C0C0C0;" rel="nofollow">API</a> <a href="/search/index.php?tags=%D0%91%D0%B8%D1%82%D1%80%D0%B8%D0%BA%D1%81" style="font-size: 10px; color: #7F9AD3;" rel="nofollow">Битрикс</a> </div>
+</noindex>
+<br>
+
+<div class="rblock">
+	<a target="_new" href="https://timeweb.com/ru/?i=29544&a=60" class="hidden-xs"><img style="border:0px;" src="https://timeweb.com/ru/img/b/200x300/200x300-1.gif"></a>
+</div>
+		</div>
+	</div>
+</div>
+
+<!-- FOOTER -->
+<div id="prefooter"></div>
+<div id="footer">
+	<div id="footer_inner" class="container">
+		<div class="row">
+		    <div class="col-sm-4">
+		        <img src="/bitrix/templates/b_iplogic_template/images/footlogo.png" alt="iPloGic" style="margin-bottom:20px;" /><br />
+		        ООО АЙПИ ЛОГИКА &copy; 2007-2019<br /><br /><br />
+		        <a target="_blank" href="http://vkontakte.ru/iplogic"><img src="/bitrix/templates/b_iplogic_template/images/vk_i.png" /></a>
+		        &nbsp;
+		        <a target="_blank" href="http://www.facebook.com/pages/iPloGic/218561974844392"><img src="/bitrix/templates/b_iplogic_template/images/fac_i.png" /></a>
+		        &nbsp;
+		        <a target="_blank" href="http://twitter.com/#!/iPloGicShop"><img src="/bitrix/templates/b_iplogic_template/images/twi_i.png" /></a>
+		        &nbsp;
+		        <a target="_blank" href="https://github.com/iPloGic"><img src="/bitrix/templates/b_iplogic_template/images/git_i.png" /></a>
+		    </div>
+		    <div style="text-align:center;" class="col-sm-4 hidden-xs hidden-sm">
+			     		    </div>
+		    <div id="footer_cont" class="col-sm-4">
+			    +7 (926) 961-66-26<br /><br /><a href="mailto:info@iplogic.ru">info@iplogic.ru</a>
+		    </div>
+		</div>
+	</div>
+</div>
+
+<a id="back-to-top" href="#" class="btn btn-primary btn-lg" role="button" title="Наверх страницы" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="call-back" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-earphone"></span>&nbsp;&nbsp;Заказ обратного звонка</h4>
+      </div>
+      <div class="modal-body">
+        <div id="call-you-back-result"></div>
+		<form method="post" class="call-you-back" id="call-back-form">
+		  <div class="form-group form-group-name">
+		    <label for="InputName">Имя</label>
+		    <input type="text" class="form-control call-you-back-name cfempty" id="InputName" placeholder="Ваше имя" name="name">
+		  </div>
+		  <div class="form-group form-group-phone">
+		    <label for="InputPhone">Телефон</label>
+		    <input type="text" class="form-control call-you-back-phone cfempty" id="InputPhone" placeholder="Ваш телефон" name="phone">
+		  </div>
+		  <div class="form-group">
+		    <br><br>
+		    <img src="/bitrix/templates/b_iplogic_template/images/loading.gif" style="display:none;height:40px;width:40px;" class="load" alt="" />
+		    <button type="button" class="btn btn-primary" id="call-back-submit">Перезвонить мне</button>
+		  </div>
+		  <br><br>
+		  <span class="glyphicon glyphicon glyphicon-info-sign" style="color:#f0ad4e"></span>&nbsp;&nbsp;Отправляя данные с форм на этом сайте Вы соглашаетесь с нашей <a href="/company/confidential/">политикой конфиденциальности</a>.
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="feed-back" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel1"><span class="glyphicon glyphicon-envelope"></span>&nbsp;&nbsp;Напишите нам</h4>
+      </div>
+      <div class="modal-body">
+        <div id="feed-back-result"></div>
+		<form method="post" class="feed-back" id="feed-back-form">
+		  <div class="form-group form-group-name">
+		    <label for="InputName1">Имя</label>
+		    <input type="text" class="form-control feed-back-name cfempty" id="InputName1" placeholder="Введите имя" name="name">
+		  </div>
+		  <div class="form-group form-group-email">
+		    <label for="InputEmail">Ваш Email</label>
+		    <input type="email" class="form-control feed-back-email cfemail" id="InputEmail" placeholder="Введите email" name="email">
+		  </div>
+		  <div class="form-group form-group-text">
+		    <label for="InputText">Текст сообщения</label>
+		    <textarea class="form-control feed-back-text cfempty" rows="5" id="InputText" name="text"></textarea>
+		  </div>
+		  <div class="form-group">
+		    <br><br>
+		    <button type="button" class="btn btn-primary" id="feed-back-submit">Отправить</button>
+		    <img src="/bitrix/templates/b_iplogic_template/images/loading.gif" style="display:none;height:30px;" class="load" alt="" />
+		  </div>
+		  <br><br>
+		  <span class="glyphicon glyphicon glyphicon-info-sign" style="color:#f0ad4e"></span>&nbsp;&nbsp;Отправляя данные с форм на этом сайте Вы соглашаетесь с нашей <a href="/company/confidential/">политикой конфиденциальности</a>.
+		</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="/bitrix/templates/b_iplogic_template/assets/jquery-1.11.1.min.js" ></script>
+    <!-- js -->
+    <script type="text/javascript" src="/bitrix/templates/b_iplogic_template/assets/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="/bitrix/templates/b_iplogic_template/assets/jquery-ui/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="/bitrix/templates/b_iplogic_template/assets/jquery.lazyload.min.js" defer="defer"></script>
+    <script type="text/javascript" src="/bitrix/templates/b_iplogic_template/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/bitrix/templates/b_iplogic_template/js/template.js"></script>
+    <script src="/bitrix/templates/b_iplogic_template/assets/prism/prism.js" type="text/javascript"></script>
+    <script src="/bitrix/templates/b_iplogic_template/assets/prism/prism-line-numbers.js" type="text/javascript"></script>
+
+    
+    
+<script type="text/javascript"  src="/bitrix/cache/js/s1/b_iplogic_template/page_58dcd356e326834a6a5223a1c059db44/page_58dcd356e326834a6a5223a1c059db44_v1.js?15670620813890"></script>
+<script type="text/javascript">var _ba = _ba || []; _ba.push(["aid", "831829f8ec94b780c57fe599603c03d6"]); _ba.push(["host", "iplogic.ru"]); (function() {var ba = document.createElement("script"); ba.type = "text/javascript"; ba.async = true;ba.src = (document.location.protocol == "https:" ? "https://" : "http://") + "bitrix.info/ba.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ba, s);})();</script>
+
+
+
+</body>
+</html>
